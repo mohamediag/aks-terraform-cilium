@@ -1,27 +1,28 @@
 resource "azurerm_virtual_network" "main" {
-  name                = "my-vnet"
-  address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.R1-project-e2e.location
-  resource_group_name = azurerm_resource_group.R1-project-e2e.name
+  name                = local.vnet_name
+  address_space       = var.vnet_address_space
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  tags                = local.common_tags
 }
 
-resource "azurerm_subnet" "subnet1" {
-  name                 = "subnet-1"
-  resource_group_name  = azurerm_resource_group.R1-project-e2e.name
+resource "azurerm_subnet" "aks" {
+  name                 = local.subnet_names.aks
+  resource_group_name  = azurerm_resource_group.main.name
   virtual_network_name = azurerm_virtual_network.main.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = var.subnet_address_prefixes.aks_subnet
 }
 
-resource "azurerm_subnet" "subnet2" {
-  name                 = "subnet-2"
-  resource_group_name  = azurerm_resource_group.R1-project-e2e.name
+resource "azurerm_subnet" "services" {
+  name                 = local.subnet_names.services
+  resource_group_name  = azurerm_resource_group.main.name
   virtual_network_name = azurerm_virtual_network.main.name
-  address_prefixes     = ["10.0.2.0/24"]
+  address_prefixes     = var.subnet_address_prefixes.services_subnet
 }
 
-resource "azurerm_subnet" "subnet3" {
-  name                 = "subnet-3"
-  resource_group_name  = azurerm_resource_group.R1-project-e2e.name
+resource "azurerm_subnet" "private" {
+  name                 = local.subnet_names.private
+  resource_group_name  = azurerm_resource_group.main.name
   virtual_network_name = azurerm_virtual_network.main.name
-  address_prefixes     = ["10.0.3.0/24"]
+  address_prefixes     = var.subnet_address_prefixes.private_subnet
 }

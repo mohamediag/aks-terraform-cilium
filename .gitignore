@@ -3,3 +3,35 @@
 .terraform.lock.hcl
 aks-kube.json
 nginx-deploy-test/
+
+# Terraform state files
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.*
+
+# Terraform variable files
+*.tfvars
+*.tfvars.json
+!terraform.tfvars.example
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude all .tfplan files except the plan/ directory
+*.tfplan
+
+# Ignore override files as they are usually used to override resources locally
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Kubernetes config files
+*.kubeconfig
+kubeconfig*
