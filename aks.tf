@@ -73,6 +73,21 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 }
 
+# Role assignments for AKS cluster access
+resource "azurerm_role_assignment" "aks_cluster_admin" {
+  for_each             = toset(var.admin_group_object_ids)
+  scope                = azurerm_kubernetes_cluster.main.id
+  role_definition_name = "Azure Kubernetes Service Cluster Admin Role"
+  principal_id         = each.value
+}
+
+resource "azurerm_role_assignment" "aks_rbac_admin" {
+  for_each             = toset(var.admin_group_object_ids)
+  scope                = azurerm_kubernetes_cluster.main.id
+  role_definition_name = "Azure Kubernetes Service RBAC Cluster Admin"
+  principal_id         = each.value
+}
+
 # Log Analytics Workspace for monitoring
 resource "azurerm_log_analytics_workspace" "main" {
   name                = "${local.naming_prefix}-law"
