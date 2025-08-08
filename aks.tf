@@ -11,7 +11,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   api_server_access_profile {
     authorized_ip_ranges = var.authorized_ip_ranges
   }
-  role_based_access_control_enabled   = true
+  role_based_access_control_enabled   = false
   azure_policy_enabled               = true
   http_application_routing_enabled   = false
   oidc_issuer_enabled               = true
@@ -47,11 +47,6 @@ resource "azurerm_kubernetes_cluster" "main" {
     outbound_type       = "loadBalancer"
   }
 
-  azure_active_directory_role_based_access_control {
-    managed                = true
-    admin_group_object_ids = var.admin_group_object_ids
-    azure_rbac_enabled     = true
-  }
 
   key_vault_secrets_provider {
     secret_rotation_enabled = true
@@ -73,20 +68,6 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 }
 
-# Role assignments for AKS cluster access
-resource "azurerm_role_assignment" "aks_cluster_admin" {
-  for_each             = toset(var.admin_group_object_ids)
-  scope                = azurerm_kubernetes_cluster.main.id
-  role_definition_name = "Azure Kubernetes Service Cluster Admin Role"
-  principal_id         = each.value
-}
-
-resource "azurerm_role_assignment" "aks_rbac_admin" {
-  for_each             = toset(var.admin_group_object_ids)
-  scope                = azurerm_kubernetes_cluster.main.id
-  role_definition_name = "Azure Kubernetes Service RBAC Cluster Admin"
-  principal_id         = each.value
-}
 
 # Log Analytics Workspace for monitoring
 resource "azurerm_log_analytics_workspace" "main" {
