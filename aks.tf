@@ -12,10 +12,10 @@ resource "azurerm_kubernetes_cluster" "main" {
     authorized_ip_ranges = var.authorized_ip_ranges
   }
   role_based_access_control_enabled   = false
-  azure_policy_enabled               = true
+  azure_policy_enabled               = false
   http_application_routing_enabled   = false
-  oidc_issuer_enabled               = true
-  workload_identity_enabled         = true
+  oidc_issuer_enabled               = false
+  workload_identity_enabled         = false
 
   default_node_pool {
     name                = "default"
@@ -52,13 +52,13 @@ resource "azurerm_kubernetes_cluster" "main" {
     secret_rotation_enabled = true
   }
 
-  microsoft_defender {
-    log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
-  }
+  //microsoft_defender {
+    //log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
+  //}
 
-  oms_agent {
-    log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
-  }
+  //oms_agent {
+    //log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
+  //}
 
   lifecycle {
     ignore_changes = [
@@ -70,33 +70,11 @@ resource "azurerm_kubernetes_cluster" "main" {
 
 
 # Log Analytics Workspace for monitoring
-resource "azurerm_log_analytics_workspace" "main" {
+/* resource "azurerm_log_analytics_workspace" "main" {
   name                = "${local.naming_prefix}-law"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
   tags                = local.common_tags
-}
-
-# Outputs
-output "cluster_name" {
-  description = "Name of the AKS cluster"
-  value       = azurerm_kubernetes_cluster.main.name
-}
-
-output "cluster_fqdn" {
-  description = "FQDN of the AKS cluster"
-  value       = azurerm_kubernetes_cluster.main.fqdn
-}
-
-output "cluster_identity" {
-  description = "Identity of the AKS cluster"
-  value       = azurerm_kubernetes_cluster.main.identity
-}
-
-output "kube_config" {
-  description = "Kubernetes configuration file"
-  value       = azurerm_kubernetes_cluster.main.kube_config_raw
-  sensitive   = true
-}
+} */

@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "Name of the Azure Resource Group"
   type        = string
-  default     = "rg-aks-terraform-cilium"
+  default     = "rg-aks-terraform"
 }
 
 variable "location" {
@@ -71,13 +71,13 @@ variable "service_cidr" {
 variable "dns_service_ip" {
   description = "IP address for Kubernetes DNS service"
   type        = string
-  default     = "10.0.4.5"
+  default     = "10.0.4.10"
 }
 
 variable "enable_private_cluster" {
   description = "Enable private AKS cluster"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "authorized_ip_ranges" {

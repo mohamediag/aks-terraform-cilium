@@ -3,34 +3,34 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: release-name
+  name: istio-ingress
   namespace: istio-system
   labels:
-    app.kubernetes.io/name: release-name
+    app.kubernetes.io/name: istio-ingress
     app.kubernetes.io/managed-by: "Helm"
-    app.kubernetes.io/instance: "release-name"
+    app.kubernetes.io/instance: "istio-ingress"
     app.kubernetes.io/part-of: "istio"
-    app.kubernetes.io/version: "1.26.3"
-    helm.sh/chart: gateway-1.26.3
-    app: release-name
-    istio: release-name
+    app.kubernetes.io/version: "1.27.0"
+    helm.sh/chart: gateway-1.27.0
+    app: istio-ingress
+    istio: ingress
     "istio.io/dataplane-mode": "none"
 ---
 # Source: gateway/templates/role.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: release-name
+  name: istio-ingress
   namespace: istio-system
   labels:
-    app.kubernetes.io/name: release-name
+    app.kubernetes.io/name: istio-ingress
     app.kubernetes.io/managed-by: "Helm"
-    app.kubernetes.io/instance: "release-name"
+    app.kubernetes.io/instance: "istio-ingress"
     app.kubernetes.io/part-of: "istio"
-    app.kubernetes.io/version: "1.26.3"
-    helm.sh/chart: gateway-1.26.3
-    app: release-name
-    istio: release-name
+    app.kubernetes.io/version: "1.27.0"
+    helm.sh/chart: gateway-1.27.0
+    app: istio-ingress
+    istio: ingress
     "istio.io/dataplane-mode": "none"
   annotations:
     {}
@@ -43,43 +43,43 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: release-name
+  name: istio-ingress
   namespace: istio-system
   labels:
-    app.kubernetes.io/name: release-name
+    app.kubernetes.io/name: istio-ingress
     app.kubernetes.io/managed-by: "Helm"
-    app.kubernetes.io/instance: "release-name"
+    app.kubernetes.io/instance: "istio-ingress"
     app.kubernetes.io/part-of: "istio"
-    app.kubernetes.io/version: "1.26.3"
-    helm.sh/chart: gateway-1.26.3
-    app: release-name
-    istio: release-name
+    app.kubernetes.io/version: "1.27.0"
+    helm.sh/chart: gateway-1.27.0
+    app: istio-ingress
+    istio: ingress
     "istio.io/dataplane-mode": "none"
   annotations:
     {}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: release-name
+  name: istio-ingress
 subjects:
 - kind: ServiceAccount
-  name: release-name
+  name: istio-ingress
 ---
 # Source: gateway/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: release-name
+  name: istio-ingress
   namespace: istio-system
   labels:
-    app.kubernetes.io/name: release-name
+    app.kubernetes.io/name: istio-ingress
     app.kubernetes.io/managed-by: "Helm"
-    app.kubernetes.io/instance: "release-name"
+    app.kubernetes.io/instance: "istio-ingress"
     app.kubernetes.io/part-of: "istio"
-    app.kubernetes.io/version: "1.26.3"
-    helm.sh/chart: gateway-1.26.3
-    app: release-name
-    istio: release-name
+    app.kubernetes.io/version: "1.27.0"
+    helm.sh/chart: gateway-1.27.0
+    app: istio-ingress
+    istio: ingress
     "istio.io/dataplane-mode": "none"
   annotations:
     {}
@@ -99,32 +99,32 @@ spec:
       protocol: TCP
       targetPort: 443
   selector:
-    app: release-name
-    istio: release-name
+    app: istio-ingress
+    istio: ingress
 ---
 # Source: gateway/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: release-name
+  name: istio-ingress
   namespace: istio-system
   labels:
-    app.kubernetes.io/name: release-name
+    app.kubernetes.io/name: istio-ingress
     app.kubernetes.io/managed-by: "Helm"
-    app.kubernetes.io/instance: "release-name"
+    app.kubernetes.io/instance: "istio-ingress"
     app.kubernetes.io/part-of: "istio"
-    app.kubernetes.io/version: "1.26.3"
-    helm.sh/chart: gateway-1.26.3
-    app: release-name
-    istio: release-name
+    app.kubernetes.io/version: "1.27.0"
+    helm.sh/chart: gateway-1.27.0
+    app: istio-ingress
+    istio: ingress
     "istio.io/dataplane-mode": "none"
   annotations:
     {}
 spec:
   selector:
     matchLabels:
-      app: release-name
-      istio: release-name
+      app: istio-ingress
+      istio: ingress
   template:
     metadata:
       annotations:
@@ -135,17 +135,17 @@ spec:
         sidecar.istio.io/inject: "true"
       labels:
         sidecar.istio.io/inject: "true"
-        app: release-name
-        istio: release-name
-        app.kubernetes.io/name: release-name
+        app: istio-ingress
+        istio: ingress
+        app.kubernetes.io/name: istio-ingress
         app.kubernetes.io/managed-by: "Helm"
-        app.kubernetes.io/instance: "release-name"
+        app.kubernetes.io/instance: "istio-ingress"
         app.kubernetes.io/part-of: "istio"
-        app.kubernetes.io/version: "1.26.3"
-        helm.sh/chart: gateway-1.26.3
+        app.kubernetes.io/version: "1.27.0"
+        helm.sh/chart: gateway-1.27.0
         "istio.io/dataplane-mode": "none"
     spec:
-      serviceAccountName: release-name
+      serviceAccountName: istio-ingress
       securityContext:
         # Safe since 1.22: https://github.com/kubernetes/kubernetes/pull/103326
         sysctls:
@@ -183,17 +183,17 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: release-name
+  name: istio-ingress
   namespace: istio-system
   labels:
-    app.kubernetes.io/name: release-name
+    app.kubernetes.io/name: istio-ingress
     app.kubernetes.io/managed-by: "Helm"
-    app.kubernetes.io/instance: "release-name"
+    app.kubernetes.io/instance: "istio-ingress"
     app.kubernetes.io/part-of: "istio"
-    app.kubernetes.io/version: "1.26.3"
-    helm.sh/chart: gateway-1.26.3
-    app: release-name
-    istio: release-name
+    app.kubernetes.io/version: "1.27.0"
+    helm.sh/chart: gateway-1.27.0
+    app: istio-ingress
+    istio: ingress
     "istio.io/dataplane-mode": "none"
   annotations:
     {}
@@ -201,7 +201,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: release-name
+    name: istio-ingress
   minReplicas: 1
   maxReplicas: 5
   metrics:
