@@ -18,3 +18,26 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+  ignoreDifferences:
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
+    name: istio-sidecar-injector
+    jsonPointers:
+    - /webhooks/0/admissionReviewVersions
+    - /webhooks/0/namespaceSelector/matchExpressions
+    - /webhooks/1/admissionReviewVersions
+    - /webhooks/1/namespaceSelector/matchExpressions
+    - /webhooks/2/admissionReviewVersions
+    - /webhooks/2/namespaceSelector/matchExpressions
+    - /webhooks/3/admissionReviewVersions
+    - /webhooks/3/namespaceSelector/matchExpressions
+  - group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    name: istio-validator-istio-system
+    jsonPointers:
+    - /webhooks/0/failurePolicy
+  - group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    name: istiod-default-validator
+    jsonPointers:
+    - /webhooks/0/failurePolicy
