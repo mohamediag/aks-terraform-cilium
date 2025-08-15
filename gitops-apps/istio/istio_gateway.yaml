@@ -126,7 +126,7 @@ spec:
       app: istio-ingress
       istio: ingress
   template:
-    replicas: 1
+    replicas: 0
     metadata:
       annotations:
         inject.istio.io/templates: gateway
