@@ -202,8 +202,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: istio-ingress
-  minReplicas: 0
-  maxReplicas: 0
+  minReplicas: 1
+  maxReplicas: 
   metrics:
     - type: Resource
       resource:
