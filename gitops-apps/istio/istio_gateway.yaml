@@ -203,7 +203,7 @@ spec:
     kind: Deployment
     name: istio-ingress
   minReplicas: 1
-  maxReplicas: 
+  maxReplicas: 5
   metrics:
     - type: Resource
       resource:
