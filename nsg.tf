@@ -5,6 +5,10 @@ resource "azurerm_network_security_group" "aks" {
   resource_group_name = azurerm_resource_group.main.name
   tags                = local.common_tags
 
+  lifecycle {
+    ignore_changes = [tags["CreatedDate"]]
+  }
+
   security_rule {
     name                       = "AllowKubernetesApiServer"
     priority                   = 1001
@@ -49,6 +53,10 @@ resource "azurerm_network_security_group" "services" {
   resource_group_name = azurerm_resource_group.main.name
   tags                = local.common_tags
 
+  lifecycle {
+    ignore_changes = [tags["CreatedDate"]]
+  }
+
   security_rule {
     name                       = "AllowHTTP"
     priority                   = 1001
@@ -80,6 +88,10 @@ resource "azurerm_network_security_group" "private" {
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   tags                = local.common_tags
+
+  lifecycle {
+    ignore_changes = [tags["CreatedDate"]]
+  }
 
   security_rule {
     name                       = "AllowVnetInbound"

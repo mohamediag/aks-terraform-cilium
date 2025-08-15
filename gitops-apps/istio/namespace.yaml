@@ -11,3 +11,4 @@ metadata:
   name: istio-ingress
   labels:
     istio-injection: enabled
+
