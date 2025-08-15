@@ -126,7 +126,6 @@ spec:
       app: istio-ingress
       istio: ingress
   template:
-    replicas: 0
     metadata:
       annotations:
         inject.istio.io/templates: gateway
@@ -180,38 +179,38 @@ spec:
               memory: 128Mi
       terminationGracePeriodSeconds: 30
 ---
-# # Source: gateway/templates/hpa.yaml
-# apiVersion: autoscaling/v2
-# kind: HorizontalPodAutoscaler
-# metadata:
-#   name: istio-ingress
-#   namespace: istio-ingress
-#   labels:
-#     app.kubernetes.io/name: istio-ingress
-#     app.kubernetes.io/managed-by: "Helm"
-#     app.kubernetes.io/instance: "istio-ingress"
-#     app.kubernetes.io/part-of: "istio"
-#     app.kubernetes.io/version: "1.27.0"
-#     helm.sh/chart: gateway-1.27.0
-#     app: istio-ingress
-#     istio: ingress
-#     "istio.io/dataplane-mode": "none"
-#   annotations:
-#     {}
-# spec:
-#   scaleTargetRef:
-#     apiVersion: apps/v1
-#     kind: Deployment
-#     name: istio-ingress
-#   minReplicas: 0
-#   maxReplicas: 0
-#   metrics:
-#     - type: Resource
-#       resource:
-#         name: cpu
-#         target:
-#           averageUtilization: 80
-#           type: Utilization
+# Source: gateway/templates/hpa.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: istio-ingress
+  namespace: istio-ingress
+  labels:
+    app.kubernetes.io/name: istio-ingress
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/instance: "istio-ingress"
+    app.kubernetes.io/part-of: "istio"
+    app.kubernetes.io/version: "1.27.0"
+    helm.sh/chart: gateway-1.27.0
+    app: istio-ingress
+    istio: ingress
+    "istio.io/dataplane-mode": "none"
+  annotations:
+    {}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: istio-ingress
+  minReplicas: 0
+  maxReplicas: 0
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          averageUtilization: 80
+          type: Utilization
 ---
 # Source: gateway/templates/zzz_profile.yaml
 #  Flatten globals, if defined on a per-chart basis
