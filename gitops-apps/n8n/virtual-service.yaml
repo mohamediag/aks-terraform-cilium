@@ -13,7 +13,7 @@ spec:
         - uri:
             prefix: /n8n
       rewrite:
-        uri: /n8n
+        uri: /
       route:
         - destination:
             host: n8n.n8n.svc.cluster.local
