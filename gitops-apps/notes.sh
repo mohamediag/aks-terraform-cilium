@@ -21,5 +21,6 @@ helm template istio-ingress istio/gateway -n istio-ingress > istio_gateway.yaml
 kubectl apply -f istio_gateway.yaml
 
 ## Prometheus operator
-helm template prometheus-operator oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack -output-dir ./prometheus_operator
-kubectl apply -f prometheus_operator
+helm template prometheus-operator oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack -n prometheus-operator --output-dir ./prometheus_operator
+helm template prometheus-operator oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack -n prometheus-operator --include-crds > ./prometheus_operator/prometheus_operator.yaml
+
