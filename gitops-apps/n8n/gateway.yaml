@@ -13,12 +13,12 @@ spec:
         protocol: HTTP
       hosts:
         - "*"
-    # - port:
-    #     number: 443
-    #     name: https
-    #     protocol: HTTPS
-    #   tls:
-    #     mode: SIMPLE
-    #     credentialName: n8n-tls-secret
-    #   hosts:
-    #     - "*"
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: nginx-tls-secret
+      hosts:
+        - "*"
