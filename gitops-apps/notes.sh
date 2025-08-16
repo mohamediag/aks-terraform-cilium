@@ -1,6 +1,6 @@
 ## Generate Kube config
 terraform output -raw kube_config > aks-kube.json
-cp aks-kube.json /Users/doums/.kube/config 
+mv aks-kube.json /Users/doums/.kube/config 
 
 ## install argocd
 kubectl create namespace argocd
@@ -17,6 +17,9 @@ kubectl apply -f istio_base.yaml
 helm template istiod istio/istiod -n istio-system > istio_istiod.yaml
 kubectl apply -f istio_istiod.yaml
 
- helm template istio-ingress istio/gateway -n istio-ingress > istio_gateway.yaml
+helm template istio-ingress istio/gateway -n istio-ingress > istio_gateway.yaml
 kubectl apply -f istio_gateway.yaml
 
+## Prometheus operator
+helm template prometheus-operator oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack -output-dir ./prometheus_operator
+kubectl apply -f prometheus_operator
