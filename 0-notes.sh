@@ -28,3 +28,4 @@ kubectl apply -f istio_gateway.yaml
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 mkdir -p ./gitops-apps/monitoring/prometheus
 helm template prometheus-community prometheus-community/prometheus -n monitoring --include-crds --output-dir ./gitops-apps/monitoring/prometheus/prometheus.yaml
+

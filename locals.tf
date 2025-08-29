@@ -9,16 +9,16 @@ locals {
   
   # Subnet names
   subnet_names = {
-    aks      = "${local.naming_prefix}-aks-subnet"
-    services = "${local.naming_prefix}-services-subnet" 
-    private  = "${local.naming_prefix}-private-subnet"
+    nodes      = "${local.naming_prefix}-nodes-subnet"
+    # services = "${local.naming_prefix}-services-subnet" 
+    # private  = "${local.naming_prefix}-private-subnet"
   }
-  
+
   # NSG names
   nsg_names = {
-    aks      = "${local.naming_prefix}-aks-nsg"
-    services = "${local.naming_prefix}-services-nsg"
-    private  = "${local.naming_prefix}-private-nsg"
+    nodes      = "${local.naming_prefix}-nodes-nsg"
+    # services = "${local.naming_prefix}-services-nsg"
+    # private  = "${local.naming_prefix}-private-nsg"
   }
   
   # Common tags

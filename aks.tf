@@ -11,27 +11,25 @@ resource "azurerm_kubernetes_cluster" "main" {
   api_server_access_profile {
     authorized_ip_ranges = var.authorized_ip_ranges
   }
-  role_based_access_control_enabled   = false
-  azure_policy_enabled               = false
-  http_application_routing_enabled   = false
-  oidc_issuer_enabled               = false
-  workload_identity_enabled         = false
+  #role_based_access_control_enabled   = false
+  azure_policy_enabled               = true
+  #http_application_routing_enabled   = false
+  #oidc_issuer_enabled               = false
+  #workload_identity_enabled         = false
 
   default_node_pool {
     name                = "default"
     node_count          = var.node_count
     vm_size             = var.vm_size
-    vnet_subnet_id      = azurerm_subnet.aks.id
-    type                = "VirtualMachineScaleSets"
-    enable_auto_scaling = true
-    min_count           = 2
-    max_count           = 5
-    os_disk_size_gb    = 30
-    zones              = ["1", "2", "3"]
+    vnet_subnet_id      = azurerm_subnet.nodes.id
+    #type                = "VirtualMachineScaleSets"
+    #enable_auto_scaling = true
+    #min_count           = 2
+    #max_count           = 5
+    #os_disk_size_gb    = 30
+    #zones              = ["1", "2", "3"]
     
-    upgrade_settings {
-      max_surge = "10%"
-    }
+
   }
 
   identity {
@@ -48,9 +46,9 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
 
-  key_vault_secrets_provider {
-    secret_rotation_enabled = true
-  }
+  # key_vault_secrets_provider {
+  #   secret_rotation_enabled = true
+  # }
 
   //microsoft_defender {
     //log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id

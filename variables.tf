@@ -7,7 +7,7 @@ variable "resource_group_name" {
 variable "location" {
   description = "Azure region for resources"
   type        = string
-  default     = "France Central"
+  default     = "UK South"
 }
 
 variable "project_name" {
@@ -31,7 +31,7 @@ variable "cluster_name" {
 variable "node_count" {
   description = "Number of nodes in the default node pool"
   type        = number
-  default     = 2
+  default     = 3
 }
 
 variable "vm_size" {
@@ -56,7 +56,7 @@ variable "subnet_address_prefixes" {
   description = "Address prefixes for subnets"
   type = map(list(string))
   default = {
-    aks_subnet     = ["10.0.1.0/24"]
+    nodes_subnet     = ["10.0.1.0/24"]
     services_subnet = ["10.0.2.0/24"]
     private_subnet  = ["10.0.3.0/24"]
   }
