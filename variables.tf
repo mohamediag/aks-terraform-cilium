@@ -43,7 +43,7 @@ variable "vm_size" {
 variable "kubernetes_version" {
   description = "Kubernetes version for the AKS cluster"
   type        = string
-  default     = null
+  default     = "1.32"
 }
 
 variable "vnet_address_space" {

@@ -24,7 +24,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     vnet_subnet_id      = azurerm_subnet.aks.id
     type                = "VirtualMachineScaleSets"
     enable_auto_scaling = true
-    min_count           = 1
+    min_count           = 2
     max_count           = 5
     os_disk_size_gb    = 30
     zones              = ["1", "2", "3"]
