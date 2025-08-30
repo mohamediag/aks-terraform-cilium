@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "Name of the Azure Resource Group"
   type        = string
-  default     = "rg-aks-terraform"
+  default     = "aks-terraform"
 }
 
 variable "location" {
@@ -43,7 +43,7 @@ variable "vm_size" {
 variable "kubernetes_version" {
   description = "Kubernetes version for the AKS cluster"
   type        = string
-  default     = "1.32"
+  default     = "1.30"
 }
 
 variable "vnet_address_space" {

@@ -11,7 +11,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   api_server_access_profile {
     authorized_ip_ranges = var.authorized_ip_ranges
   }
-  #role_based_access_control_enabled   = false
+  role_based_access_control_enabled   = true
   azure_policy_enabled               = true
   #http_application_routing_enabled   = false
   #oidc_issuer_enabled               = false
@@ -22,14 +22,19 @@ resource "azurerm_kubernetes_cluster" "main" {
     node_count          = var.node_count
     vm_size             = var.vm_size
     vnet_subnet_id      = azurerm_subnet.nodes.id
-    #type                = "VirtualMachineScaleSets"
-    #enable_auto_scaling = true
-    #min_count           = 2
-    #max_count           = 5
-    #os_disk_size_gb    = 30
-    #zones              = ["1", "2", "3"]
+    type                = "VirtualMachineScaleSets"
+    os_disk_type        = "Managed"
+    os_disk_size_gb     = 128
+    max_pods            = 30
+    zones               = ["1", "2", "3"]
+    fips_enabled        = false
+    kubelet_disk_type   = "OS"
     
-
+    upgrade_settings {
+      drain_timeout_in_minutes      = 0
+      max_surge                    = "10%"
+      node_soak_duration_in_minutes = 0
+    }
   }
 
   identity {
@@ -54,13 +59,12 @@ resource "azurerm_kubernetes_cluster" "main" {
     //log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
   //}
 
-  //oms_agent {
-    //log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
-  //}
+  oms_agent {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
+  }
 
   lifecycle {
     ignore_changes = [
-      kubernetes_version,
       default_node_pool[0].node_count,
       tags["CreatedDate"],
       identity[0].identity_ids,
@@ -71,11 +75,11 @@ resource "azurerm_kubernetes_cluster" "main" {
 
 
 # Log Analytics Workspace for monitoring
-/* resource "azurerm_log_analytics_workspace" "main" {
+resource "azurerm_log_analytics_workspace" "main" {
   name                = "${local.naming_prefix}-law"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
   tags                = local.common_tags
-} */
+}
