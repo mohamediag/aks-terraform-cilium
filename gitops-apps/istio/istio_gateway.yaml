@@ -119,7 +119,7 @@ metadata:
     istio: ingress
     "istio.io/dataplane-mode": "none"
   annotations:
-    {}
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   selector:
     matchLabels:

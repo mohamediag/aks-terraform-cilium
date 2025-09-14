@@ -2876,6 +2876,8 @@ kind: Deployment
 metadata:
   name: istiod
   namespace: istio-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
   labels:
     app: istiod
     istio.io/rev: "default"

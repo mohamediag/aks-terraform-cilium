@@ -9,6 +9,8 @@ kind: ServiceAccount
 metadata:
   name: istio-reader-service-account
   namespace: istio-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
   labels:
     app: istio-reader
     release: release-name
