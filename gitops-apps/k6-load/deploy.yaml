@@ -16,7 +16,7 @@ spec:
       containers:
       - name: k6
         image: grafana/k6:latest
-        command: ["k6", "run", "--out", "prometheus", "/scripts/load-test.js"]
+        command: ["k6", "run", "--out", "experimental-prometheus-rw", "/scripts/load-test.js"]
         ports:
         - containerPort: 5656
           name: metrics
