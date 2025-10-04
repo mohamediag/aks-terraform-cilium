@@ -11,7 +11,7 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /n8n
+            prefix: /
       route:
         - destination:
             host: n8n
